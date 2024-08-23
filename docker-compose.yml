@@ -1,0 +1,31 @@
+version: '3.10'
+
+services:
+  llama_index:
+    build: ./llama_index
+    container_name: llama_index_container
+    volumes:
+      - llama_index_data:/app/data
+    ports:
+      - "8001:8001"
+
+  llama_model:
+    build: ./llama
+    container_name: llama_model_container
+    volumes:
+      - llama_model_data:/app/model
+    ports:
+      - "8002:8002"
+
+  dify:
+    build: ./dify
+    container_name: dify_container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - llama_index
+      - llama_model
+
+volumes:
+  llama_index_data:
+  llama_model_data:

@@ -1,0 +1,3 @@
+pandas
+llama_index
+flask
